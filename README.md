@@ -30,7 +30,7 @@ int main(){
 		In_BUFF[i] = (unsigned char)(i % 256);
 		printf("%d,",In_BUFF[i]);
 	}
-	/*****************************************Encryption*****************************************/
+	
 	printf("\n");
 	t1 = GetTickCount();
 	out_BUFF1 = encrypt(PasswordBuff, In_BUFF, InBUFF_Length, &OutByteArray_length1);
@@ -42,7 +42,6 @@ int main(){
 		printf("%d,",out_BUFF1[i]);
 	}
 	printf("\n");
-	/****************************************Decryption******************************************/
 	
 	t1 = GetTickCount();
 	out_BUFF2 = decrypt(PasswordBuff, out_BUFF1, OutByteArray_length1, &OutByteArray_length2);
