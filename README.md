@@ -4,16 +4,16 @@ WJLSymmetricEncryption is a symmetric encryption algorithm source program based 
 2, supports custom secret key length, combined with WJLHA3.
 3, employs random numbers (the length that can be defined), making the results different for each coding.
 
-#include "WJLSE3.h"
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <windows.h>
-#include <time.h>
-#include <math.h>
-#ifdef WIN32
-#define  inline __inline
-#endif // WIN32
+include "WJLSE3.h"
+include <stdio.h>
+include <string.h>
+include <stdlib.h>
+include <windows.h>
+include <time.h>
+include <math.h>
+ifdef WIN32
+define  inline __inline
+endif // WIN32
 
 // test
 int main(){
