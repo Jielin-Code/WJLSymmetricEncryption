@@ -1,10 +1,7 @@
 # WJLSymmetricEncryption
 WJLSymmetricEncryption is a symmetric encryption algorithm source program based on a weighted probability model, which has:
-
 1, is based on the wheel function of the weight coefficient and, yes, the information entropy of the original data does not change.
-
 2, supports custom secret key length, combined with WJLHA3.
-
 3, employs random numbers (the length that can be defined), making the results different for each coding.
 
 Use the method as below:
@@ -21,15 +18,10 @@ Use the method as below:
 	#endif // WIN32
 	int main(){
 		long t1,t2;
-
 		int i = 0, tmp = 0;
-
 		int InBUFF_Length = 100000;
-
 		unsigned int OutByteArray_length1,OutByteArray_length2;
-
 		unsigned char *In_BUFF;
-
 		unsigned char *out_BUFF1, *out_BUFF2;
 		const char *PasswordBuff = "123456789ssdfsdf444asdfasdf";
 		In_BUFF = (unsigned char *)malloc(InBUFF_Length);
