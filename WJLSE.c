@@ -49,7 +49,7 @@ void InitializeWJLEnCoder(WJLEnCoder *coder, unsigned int InByteArray_length)
 	// Total is the Sum of all symbol's freq
 	coder->Total = coder->symbolsMaxCount + 1;
 	// Initialize the OutBufferArray
-	coder->encodeOutBufferArray = (unsigned char *)malloc((InByteArray_length > 10000 ? InByteArray_length : 20000)  + 1024);
+	coder->encodeOutBufferArray = (unsigned char *)malloc((double)InByteArray_length*1.2);
 }
 // Query 'SERandomOfUCharTable' table function
 double getEnCoefficient(int index, unsigned char Symbol, unsigned char OneKeytByte)
