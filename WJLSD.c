@@ -251,7 +251,7 @@ unsigned char* WJLWeightedDecode(WJLDeCoder *coder, const char *passwords, int p
 	// start decoding InByteArray
 	for(i = 0; i < byteslength ; ++ i){
 		decryptingasymbol(coder, InByteArray, InByteArray_length);
-		coder->coefficient = getDeCoefficient(i, (unsigned char)coder->Result, keytBuFF[ i % keytBuFF_Length ]);
+		coder->coefficient = getDeCoefficient(i, (unsigned char)coder->Result ^ keytBuFF[ keytBuFF_Length - i % keytBuFF_Length - 1 ], keytBuFF[ i % keytBuFF_Length ]);
 		OutPutDecode(coder, coder->Result);
 	}
 	*OutByteArray_length = coder->decodeOutBufferLoop;
