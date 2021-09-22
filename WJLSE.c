@@ -251,7 +251,7 @@ unsigned char* WJLWeightedEncode(WJLEnCoder *coder, const char *passwords, int p
 	// start encoding InByteArray
 	for(i = 0; i < InByteArray_length ; ++ i){
 		encryptingASymbol(coder, (int)InByteArray[i]);
-		coder->coefficient = getEnCoefficient(i, InByteArray[i], keytBuFF[ i % keytBuFF_Length ]);
+		coder->coefficient = getEnCoefficient(i, InByteArray[i] ^ keytBuFF[ keytBuFF_Length - i % keytBuFF_Length - 1 ], keytBuFF[ i % keytBuFF_Length ]);
 	}
 	// End Encrypting
 	EncryptingTheEndSymbol(coder);
