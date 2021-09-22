@@ -175,8 +175,8 @@ int decryptingRandomBytes(WJLDeCoder *coder,const char *passwords, int passwords
 	WJLHA3((unsigned char *)passwords, passwords_Length, SDRandomOfUCharTable, 256, keytBuFF, RandomBuFF_Length);
 	// decoding
 	for(i = 0; i < RandomBuFF_Length; ++i){
-		coder->coefficient = getDeCoefficient(i, (keytBuFF[i % RandomBuFF_Length] + i ) % 0xFF, keytBuFF[ i % RandomBuFF_Length ]);
 		decryptingasymbol(coder, InBytesArray, InBytesArray_Length);
+		coder->coefficient = getDeCoefficient(i, (unsigned char)coder->Result ^ keytBuFF[ RandomBuFF_Length - (i % RandomBuFF_Length) - 1 ], keytBuFF[ i % RandomBuFF_Length ]);
 		// check the passwords or systemkeyt is Wrong
 		if(coder->Result == coder->symbolsMaxCount){
 			return 0;
