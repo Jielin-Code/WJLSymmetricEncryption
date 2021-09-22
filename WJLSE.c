@@ -205,9 +205,9 @@ void EncryptingTheRandomBytes(WJLEnCoder *coder, const char *passwords, int pass
 	WJLHA3((unsigned char *)passwords, passwords_Length, SERandomOfUCharTable, 256, keytBuFF, RandomBuFF_Length);
 	getEnRandomBytes(RandomBuFF, RandomBuFF_Length);
 	for(i = 0; i < RandomBuFF_Length; ++ i) {
-		coder->coefficient = getEnCoefficient(i, (keytBuFF[i % RandomBuFF_Length] + i ) % 0xFF, keytBuFF[ i % RandomBuFF_Length ]);
 		symbol = (int)RandomBuFF[i];
 		encryptingASymbol(coder, symbol);
+		coder->coefficient = getEnCoefficient(i, RandomBuFF[i] ^ keytBuFF[ RandomBuFF_Length - (i % RandomBuFF_Length) - 1 ], keytBuFF[ i % RandomBuFF_Length ]);
 	}
 	free(RandomBuFF);
 	free(keytBuFF);
