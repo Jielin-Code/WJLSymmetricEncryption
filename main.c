@@ -13,44 +13,49 @@
 int main(){
 	long t1,t2;
 	int i = 0, tmp = 0;
-	int InBUFF_Length = 100000;// ÊäÈëµÄ×Ö½Ú³¤¶È
+	int InBUFF_Length = 100000;// è¾“å…¥çš„å­—èŠ‚é•¿åº¦
 	unsigned int OutByteArray_length1,OutByteArray_length2;
 	unsigned char *In_BUFF;
 	unsigned char *out_BUFF1, *out_BUFF2;
-	const char *PasswordBuff = "123456789s°¢Ë¹µÙ·Ò¸ĞÊÜµ½·Ösdfsdf444"; // ²»ÏŞÖÆ³¤¶È
+	unsigned int RandomBytes_Length = 64; // æ˜æ–‡ç¼–ç å‰å…ˆç¼–ç RandomBytes_Lengthä¸ªå­—èŠ‚çš„éšæœºæ•°
+	const char *PasswordBuff = "123456789sé˜¿æ–¯è’‚èŠ¬æ„Ÿå—åˆ°åˆ†sdfsdf444"; // ä¸é™åˆ¶é•¿åº¦
 	In_BUFF = (unsigned char *)malloc(InBUFF_Length);
-	// Ëæ»úÉú³ÉIn_BUFF_Len³¤¶ÈµÄÊı¾İ
-	printf("\n¼ÓÃÜÇ°µÄÊı¾İ£º\n");
+	// éšæœºç”ŸæˆIn_BUFF_Lené•¿åº¦çš„æ•°æ®
+	printf("\nåŠ å¯†å‰çš„æ•°æ®ï¼š\n");
+	srand((unsigned)time(NULL));
 	for(i = 0; i < InBUFF_Length; ++i){
-		In_BUFF[i] = (unsigned char)(i % 256);
-		printf("%d,",In_BUFF[i]);
+		In_BUFF[i] = rand() % 2;//(unsigned char)(i % 255);
+		//printf("%d,",In_BUFF[i]);
 	}
-	/*****************************************¼ÓÃÜ²¿·Ö*****************************************/
-	// µ÷ÓÃWJLSE3Ëã·¨
+	/*****************************************åŠ å¯†éƒ¨åˆ†*****************************************/
+	// è°ƒç”¨WJLSE3ç®—æ³•
 	printf("\n");
 	t1 = GetTickCount();
-	out_BUFF1 = encrypt(PasswordBuff, In_BUFF, InBUFF_Length, &OutByteArray_length1);
+	out_BUFF1 = encrypt(PasswordBuff, In_BUFF, InBUFF_Length, &OutByteArray_length1, RandomBytes_Length);
 	t2 = GetTickCount();
-	printf("¼ÓÃÜºÄÊ± :%d ms\n", t2 - t1);
-	printf("¼ÓÃÜºó×Ö½ÚÊı :%d\n", OutByteArray_length1);
-	printf("\n¼ÓÃÜºóµÄÊı¾İ£º");
+	printf("åŠ å¯†è€—æ—¶ :%d ms\n", t2 - t1);
+	printf("åŠ å¯†åå­—èŠ‚æ•° :%d\n", OutByteArray_length1);
+	printf("\nåŠ å¯†åçš„æ•°æ®ï¼š");
 	for(i = 0; i < OutByteArray_length1; ++i){
-		printf("%d,",out_BUFF1[i]);
+		//printf("%d,",out_BUFF1[i]);
 	}
 	printf("\n");
-	/****************************************½âÃÜ²¿·Ö******************************************/
-	
+
+	/****************************************è§£å¯†éƒ¨åˆ†******************************************/
 	t1 = GetTickCount();
-	out_BUFF2 = decrypt(PasswordBuff, out_BUFF1, OutByteArray_length1, &OutByteArray_length2);
+	out_BUFF2 = decrypt(PasswordBuff, out_BUFF1, OutByteArray_length1, &OutByteArray_length2, RandomBytes_Length);
 	t2 = GetTickCount();
 	if(out_BUFF2 != 0){
-		printf("½âÃÜºÄÊ± :%d ms\n", t2 - t1);
-		printf("½âÃÜºó×Ö½ÚÊı :%d\n", OutByteArray_length2);
-		printf("\n½âÃÜºóµÄÊı¾İ£º");
+		printf("è§£å¯†è€—æ—¶ :%d ms\n", t2 - t1);
+		printf("è§£å¯†åå­—èŠ‚æ•° :%d\n", OutByteArray_length2);
+		printf("\nè§£å¯†åçš„æ•°æ®ï¼š");
 		for(i = 0; i < OutByteArray_length2; ++i){
-			printf("%d,",out_BUFF2[i]);
+			//printf("%d,",out_BUFF2[i]);
 		}
-		printf("\n");
+		//printf("\n");
+	}else{
+		printf("è§£å¯†è€—æ—¶ :%d ms\n", t2 - t1);
+		printf("è§£å¯†å¤±è´¥\n");
 	}
 	
 	system("pause");
