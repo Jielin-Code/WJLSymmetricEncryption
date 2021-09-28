@@ -1,6 +1,7 @@
 #ifndef _WJLSE_h
 #define _WJLSE_h
 #include "time.h"
+#include "stdlib.h"
 #define random(x) (rand() % x)
 // Jielincode Encoding Struct
 typedef struct
@@ -33,12 +34,11 @@ typedef struct
 	unsigned char *encodeOutBufferArray;
 	// the Bit tree
 	unsigned int *SymbolsFreqArray;
-	// Array subscript pointer by In_buff
-	unsigned int decodeInBufferLoop;
-	// Array subscript pointer by EOut_buff EOut_buff_loop
-	unsigned int decodeOutBufferLoop;
-	// the Encoded cache array EOut_buff
-	unsigned char *decodeOutBufferArray;
+	// the S box
+	unsigned char *Sbox;
+	// the RandomBytes
+	unsigned char *RandomBytes;
+	unsigned int RandomBytes_Length;
 	// the Operational variables
 	unsigned int Total;
 	unsigned int CumFreq;
@@ -46,12 +46,12 @@ typedef struct
 	unsigned int values;
 	// the Decode Result
 	int Result;
+	unsigned char ucChar;
 }WJLEnCoder;
 
-void InitializeWJLEnCoder(WJLEnCoder *coder, unsigned int InByteArray_length);
-void EncryptingTheRandomBytes(WJLEnCoder *coder, const char *passwords, int passwords_Length, int RandomBuFF_Length);
-void EncryptingTheHashValue(WJLEnCoder *coder, const char *passwords, int passwords_Length, int HashValueBuFF_Length);
-void EncryptingFileLength(WJLEnCoder *coder, unsigned int InArrayLength);
-unsigned char* WJLWeightedEncode(WJLEnCoder *coder,const char *passwords, int passwords_Length, unsigned char *InByteArray, unsigned int InByteArray_length, unsigned int *OutByteArray_length);
+void InitializeWJLEnCoder(WJLEnCoder *coder, const char *passwords, int passwords_Length);
+void EncryptingTheRandomBytes(WJLEnCoder *coder, const char *passwords, int passwords_Length);
+void EncryptingFileLength(WJLEnCoder *coder, unsigned int InArrayLength, const char *passwords, int passwords_Length);
+void WJLWeightedEncode(WJLEnCoder *coder,const char *passwords, int passwords_Length, unsigned char *InByteArray, unsigned int InByteArray_length, unsigned int *OutByteArray_length);
 
 #endif
