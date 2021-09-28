@@ -27,8 +27,9 @@ Use the method as below:
 		const char *PasswordBuff = "123456789ssdfsdf444asdfasdf";
 		In_BUFF = (unsigned char *)malloc(InBUFF_Length);
 		printf("\nData before the encryption:\n");
+		srand((unsigned)time(NULL));
 		for(i = 0; i < InBUFF_Length; ++i){
-			In_BUFF[i] = (unsigned char)(i % 256);
+			In_BUFF[i] = rand() % 256;
 			printf("%d,",In_BUFF[i]);
 		}
 		printf("\n");
