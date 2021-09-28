@@ -1,5 +1,6 @@
 #ifndef _WJLSD_h
 #define _WJLSD_h
+#include <stdio.h>
 // Jielincode Encoding Struct
 typedef struct
 {
@@ -25,10 +26,6 @@ typedef struct
 	int encodeDelay;
 	// the Delayed value count EFFollow.
 	int encodeDelayCount;
-	// Array subscript pointer by EOut_buff EOut_buff_loop
-	unsigned int encodeOutBufferLoop;
-	// the Encoded cache array EOut_buff
-	unsigned char *encodeOutBufferArray;
 	// the Bit tree
 	unsigned int *SymbolsFreqArray;
 	// Array subscript pointer by In_buff
@@ -37,6 +34,9 @@ typedef struct
 	unsigned int decodeOutBufferLoop;
 	// the Encoded cache array EOut_buff
 	unsigned char *decodeOutBufferArray;
+	// the S box
+	unsigned char *Sbox;
+	unsigned int RandomBytes_Length;
 	// the Operational variables
 	unsigned int Total;
 	unsigned int CumFreq;
@@ -46,9 +46,8 @@ typedef struct
 	int Result;
 }WJLDeCoder;
 
-void InitializeWJLDeCoder(WJLDeCoder *coder, unsigned char *InByteArray, unsigned int InByteArray_length);
-int decryptingRandomBytes(WJLDeCoder *coder,const char *passwords, int passwords_Length, unsigned char *InBytesArray, unsigned int InBytesArray_Length,unsigned int RandomBuFF_Length);
-int decryptingHashValue(WJLDeCoder *coder, unsigned char *InBytesArray, unsigned int InBytesArray_Length,const char *passwords, int passwords_Length, int HashValueBuFF_Length);
-unsigned int decryptingInArraylength(WJLDeCoder *coder, unsigned char *InBytesArray, unsigned int InBytesArray_Length);
-unsigned char* WJLWeightedDecode(WJLDeCoder *coder, const char *passwords, int passwords_Length, unsigned char *InByteArray, unsigned int InByteArray_length, unsigned int byteslength, unsigned int *OutByteArray_length);
+void InitializeWJLDeCoder(WJLDeCoder *coder, unsigned char *InByteArray, unsigned int InByteArray_length, const char *passwords, int passwords_Length);
+int decryptingRandomBytes(WJLDeCoder *coder, unsigned char *InBytesArray, unsigned int InBytesArray_Length, const char *passwords, int passwords_Length);
+unsigned int decryptingInArraylength(WJLDeCoder *coder, unsigned char *InBytesArray, unsigned int InBytesArray_Length, const char *passwords, int passwords_Length);
+int WJLWeightedDecode(WJLDeCoder *coder, unsigned char *InByteArray, unsigned int InByteArray_length, const char *passwords, int passwords_Length, unsigned int byteslength, unsigned int *OutByteArray_length);
 #endif
