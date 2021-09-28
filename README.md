@@ -23,6 +23,7 @@ Use the method as below:
 		unsigned int OutByteArray_length1,OutByteArray_length2;
 		unsigned char *In_BUFF;
 		unsigned char *out_BUFF1, *out_BUFF2;
+		unsigned int RandomBytes_Length = 64;
 		const char *PasswordBuff = "123456789ssdfsdf444asdfasdf";
 		In_BUFF = (unsigned char *)malloc(InBUFF_Length);
 		printf("\nData before the encryption:\n");
@@ -32,7 +33,7 @@ Use the method as below:
 		}
 		printf("\n");
 		t1 = GetTickCount();
-		out_BUFF1 = encrypt(PasswordBuff, In_BUFF, InBUFF_Length, &OutByteArray_length1);
+		out_BUFF1 = encrypt(PasswordBuff, In_BUFF, InBUFF_Length, &OutByteArray_length1,RandomBytes_Length);
 		t2 = GetTickCount();
 		printf("Encryption Time:%d ms\n", t2 - t1);
 		printf("Number of bytes after encryption:%d\n", OutByteArray_length1);
@@ -43,7 +44,7 @@ Use the method as below:
 		printf("\n");
 
 		t1 = GetTickCount();
-		out_BUFF2 = decrypt(PasswordBuff, out_BUFF1, OutByteArray_length1, &OutByteArray_length2);
+		out_BUFF2 = decrypt(PasswordBuff, out_BUFF1, OutByteArray_length1, &OutByteArray_length2,RandomBytes_Length);
 		t2 = GetTickCount();
 		if(out_BUFF2 != 0){
 			printf("Decryption Time::%d ms\n", t2 - t1);
